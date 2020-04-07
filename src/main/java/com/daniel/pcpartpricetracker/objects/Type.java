@@ -1,4 +1,4 @@
-package com.daniel.pcpartpricetracker;
+package com.daniel.pcpartpricetracker.objects;
 
 public class Type {
 	

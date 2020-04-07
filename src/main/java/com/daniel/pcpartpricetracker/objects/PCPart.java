@@ -1,16 +1,18 @@
-package com.daniel.pcpartpricetracker;
+package com.daniel.pcpartpricetracker.objects;
 
 import java.util.ArrayList;
 
-public class Part {
+public class PCPart {
 
-	int id,type;
+	int id;
+	Type type;
 	String name;
 	ArrayList<Shop> price;
 	
-	public Part(int id, String name, ArrayList<Shop> price) {
+	public PCPart(int id,Type type, String name, ArrayList<Shop> price) {
 		super();
 		this.id = id;
+		this.type=type;
 		this.name = name;
 		this.price = price;
 	}
