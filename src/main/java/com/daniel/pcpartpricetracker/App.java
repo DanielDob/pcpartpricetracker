@@ -13,6 +13,6 @@ public class App
         @SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
         while (true)
-        	new ExecuteInput(s.next());
+        	new ExecuteInput(s.nextLine());
     }
 }
