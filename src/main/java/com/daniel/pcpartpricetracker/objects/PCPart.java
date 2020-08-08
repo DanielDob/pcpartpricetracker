@@ -41,10 +41,11 @@ public class PCPart {
 		this.price = price;
 	}
 	
-	class Shop{
+	public class Shop{
 		int id,idShop;
 		double price;
 		String name;
+		public static final String[] SHOPS={"x-kom"};
 		
 		public Shop(int id, int idShop, double price, String name) {
 			super();
