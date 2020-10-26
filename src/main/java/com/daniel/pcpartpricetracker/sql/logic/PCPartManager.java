@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import com.daniel.pcpartpricetracker.objects.PCPart;
 import com.daniel.pcpartpricetracker.sql.columns.PCPartColumns;
 
-public class PCPartMenager implements PCPartColumns{
+public class PCPartManager implements PCPartColumns{
 
 	Connection conn;
-	public PCPartMenager() {
+	public PCPartManager() {
 		conn=connect();
 	}
 	@Override
