@@ -1,23 +1,49 @@
 package com.daniel.pcpartpricetracker.sql.logic;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+
 
 import com.daniel.pcpartpricetracker.sql.columns.*;
 
 public class DatabaseManager {
-	private Connection conn = null;
+	//private Connection conn = null;
+	private Session session=null;
 	
 	public DatabaseManager() {
 		connect();
 	}
 	public void initFirstRun() {
-		createTables();
+		//createTables();
 	}
 	
 	private void connect() {
+		Transaction transaction = null;
+		try {
+			Configuration conf = new Configuration()
+		              .configure();
+		    ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+		    SessionFactory sf = conf.buildSessionFactory(sr);
+		     session= sf.openSession();
+			// start a transaction
+			transaction = session.beginTransaction();
+			// save the student object
+			//session.save(new Cat(6,"dachowiec","daszek"));
+			// commit transaction
+			transaction.commit();
+			// end
+			
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		}
+		/*
 	    try {
 	        // db parameters
 	        String url = "jdbc:sqlite:pcpartpickerdatabase.db";
@@ -31,8 +57,9 @@ public class DatabaseManager {
 	    } finally {
 	       
 	    }
+	    */
 	}
-	public void createTables() {
+	/*public void createTables() {
 		Statement st;
 		try {
 			st = conn.createStatement();
@@ -48,7 +75,10 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
-	public Connection  isConnected() {
-		return conn;
+	public void close() {
+		session.close();
+	}*/
+	public boolean isConnected() {
+		return session.isConnected();
 	}
 }
