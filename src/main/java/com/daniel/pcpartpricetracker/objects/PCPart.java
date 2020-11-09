@@ -45,7 +45,7 @@ public class PCPart {
 		int id,idShop;
 		double price;
 		String name;
-		public static final String[] SHOPS={"x-kom"};
+		public final String[] SHOPS={"x-kom"};
 		
 		public Shop(int id, int idShop, double price, String name) {
 			super();

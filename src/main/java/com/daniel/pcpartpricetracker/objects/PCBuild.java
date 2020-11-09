@@ -16,7 +16,7 @@ public class PCBuild {
 		this.components = components;
 	}
 
-	public PCPart getComnonent(PCPart part) {
+	public PCPart getComnonent(Type part) {
 		return components.get(part);
 	}
 	public HashMap<Type, PCPart> getComponents() {

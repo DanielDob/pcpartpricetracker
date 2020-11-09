@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.daniel.pcpartpricetracker.sql.columns.*;
-import javafx.scene.layout.StackPane;
 
 public class DatabaseManager {
 	private Connection conn = null;
