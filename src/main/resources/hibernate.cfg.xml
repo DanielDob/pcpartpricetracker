@@ -7,7 +7,7 @@
 	<session-factory>
 
 		<!-- JDBC Database connection settings -->
-		<property name="connection.url">jdbc:sqlite:pcppt.db</property>
+		<property name="connection.url">jdbc:sqlite:pcpartpickerdatabase.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="current_session_context_class">thread</property>
@@ -25,14 +25,15 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<!-- dbcp connection pool configuration -->
+		<!-- dbcp connection pool configuration  -->
 		<property name="hibernate.dbcp.initialSize">5</property>
 		<property name="hibernate.dbcp.maxTotal">20</property>
 		<property name="hibernate.dbcp.maxIdle">10</property>
 		<property name="hibernate.dbcp.minIdle">5</property>
 		<property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
-		<!--<mapping class="com.daniel.hibernate.entity.Cat"/>-->
+		<mapping class="com.daniel.pcpartpricetracker.objects.PCPart"/>
+		<mapping class="com.daniel.pcpartpricetracker.objects.Price"/>
 
 	</session-factory>
 
