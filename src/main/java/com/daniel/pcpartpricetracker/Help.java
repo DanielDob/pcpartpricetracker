@@ -29,12 +29,12 @@ public class Help {
 	private static void printPartFullHelp(boolean b) {
 		System.out.println(
 				 "part"
-					+ "\n\tadd [number] [type]"
-					+ "\n\t\tAdding new part to tracking price"
+					+ "\n\tadd [code] [type] [shop]"
+					+ "\n\t\tAdding new part to tracking price. Shop can be a number id."
 					+ "\n\topen [number]|"
 					+ "\n\t\tOpens in broser part"
 					+ "\n\tshow [[number] | [-all]] [-d] [-h|-h [date][date]] [-sn]"
-					+ "\n\t\tDispalying part information by default shows only full name. -d details. -h history. -sn short name."
+					+ "\n\t\tDispalying part information by default shows only full name and code. -d details. -h history. -sn short name."
 					+ "\n\txlsx ['name'] [-a] [-d [date]]"
 					+ "\n\t\tSave history to xlsx file. -a all. -d date."
 					);

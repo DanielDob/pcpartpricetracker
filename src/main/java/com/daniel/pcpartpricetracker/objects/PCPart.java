@@ -1,15 +1,51 @@
 package com.daniel.pcpartpricetracker.objects;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table (name="pc_part")
+@NoArgsConstructor
 public class PCPart {
 
+	/**
+	 *  ID in sql
+	 */
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
-	Type type;
+	/**
+	 *  IN XKOM: on site: "kod x-kom" also in URL is used
+	 */
+	int code;
+	/**
+	 * from class Type
+	 *  type of part e.g. GPU(2)
+	 */
+	int type;
+	/**
+	 *  name on site
+	 */
 	String name;
-	ArrayList<Shop> price;
-	
-	public PCPart(int id,Type type, String name, ArrayList<Shop> price) {
+	@OneToMany(mappedBy = "price", cascade = CascadeType.PERSIST)
+	List<Price> price;
+	public PCPart(int code, int type, int shop ) {
+		this.code=code;
+		this.type=type;
+		//this.shop=shop;
+	}
+	public PCPart(int id,int type, String name, List<Price> price) {
 		super();
 		this.id = id;
 		this.type=type;
@@ -19,6 +55,14 @@ public class PCPart {
 
 	public int getId() {
 		return id;
+	}
+	
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public void setId(int id) {
@@ -33,51 +77,16 @@ public class PCPart {
 		this.name = name;
 	}
 
-	public ArrayList<Shop> getPrice() {
+	public List<Price> getPrice() {
 		return price;
 	}
 
-	public void setPrice(ArrayList<Shop> price) {
+	public void setPrice(List<Price> price) {
 		this.price = price;
 	}
 	
-	public class Shop{
-		int id,idShop;
-		double price;
-		String name;
-		public final String[] SHOPS={"x-kom"};
-		
-		public Shop(int id, int idShop, double price, String name) {
-			super();
-			this.id = id;
-			this.idShop = idShop;
-			this.price = price;
-			this.name = name;
-		}
-		public int getId() {
-			return id;
-		}
-		public void setId(int id) {
-			this.id = id;
-		}
-		public int getIdShop() {
-			return idShop;
-		}
-		public void setIdShop(int idShop) {
-			this.idShop = idShop;
-		}
-		public double getPrice() {
-			return price;
-		}
-		public void setPrice(double price) {
-			this.price = price;
-		}
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		
+	@Override
+	public String toString() {
+		return "ID: "+id+" code: "+code+"name: "+ name ;
 	}
 }

@@ -7,34 +7,46 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-
-import com.daniel.pcpartpricetracker.sql.columns.*;
+import com.daniel.pcpartpricetracker.interfaces.Submitter;
+import com.sun.media.sound.SF2GlobalRegion;
 
 public class DatabaseManager {
 	//private Connection conn = null;
 	private Session session=null;
-	
+	private Transaction transaction = null;
 	public DatabaseManager() {
-		connect();
+		//connect();
 	}
 	public void initFirstRun() {
 		//createTables();
 	}
-	
+	public void run(Submitter s) {
+		connect();
+		try{
+			submit(s);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();	
+		}
+	}
 	private void connect() {
-		Transaction transaction = null;
 		try {
-			Configuration conf = new Configuration()
-		              .configure();
-		    ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
-		    SessionFactory sf = conf.buildSessionFactory(sr);
+			/*
+			 * Configuration conf = new Configuration()
+			 * .configure(); 
+			 * ServiceRegistry sr = new
+			 * StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
+			 * SessionFactory sf = conf.buildSessionFactory(sr);
+			 */
+			SessionFactory sf = new Configuration()
+					  .configure().buildSessionFactory();
 		     session= sf.openSession();
 			// start a transaction
 			transaction = session.beginTransaction();
 			// save the student object
-			//session.save(new Cat(6,"dachowiec","daszek"));
 			// commit transaction
-			transaction.commit();
+			
 			// end
 			
 		} catch (Exception e) {
@@ -75,10 +87,22 @@ public class DatabaseManager {
 			e.printStackTrace();
 		}
 	}
+	*/
 	public void close() {
 		session.close();
-	}*/
+	}
+	
 	public boolean isConnected() {
 		return session.isConnected();
+	}
+	public Session getSession() {
+		return session;
+	}
+	public void setSession(Session session) {
+		this.session = session;
+	}
+	public void  submit(Submitter s){
+		s.submit();
+		transaction.commit();
 	}
 }

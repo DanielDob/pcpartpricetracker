@@ -8,6 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
+
 public class Parts {
 
 	public void executePart(String name, String[] args) {
@@ -29,24 +32,9 @@ public class Parts {
 	}
 
 	private void add(String[] args) {
-		Document doc =null;
-		try {
-			File f = new File("xkom.html");
-			doc = Jsoup.parse(f, "UTF-8");
-			//"//https://www.x-kom.pl/p/"+args[2]
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Elements newsHeadlines = doc.select("div.u7xnnm-4.dtpmby");
-		for (Element headline : newsHeadlines) {
-			System.out.println(headline.ownText());
-		}
-		newsHeadlines = doc.select("h1.sc-1x6crnh-5.gJXkXi");
-		for (Element headline : newsHeadlines) {
-			System.out.println(headline.ownText());
-		}
-	}
+		DatabaseManager dm = new DatabaseManager();
+		dm.run(() -> dm.getSession().save(new PCPart(Integer.valueOf(args[2]),Integer.valueOf(args[3]),Integer.valueOf(args[4]))));
+ 	}
 
 	private void open(String[] args) {
 		// TODO Auto-generated method stub
@@ -54,7 +42,11 @@ public class Parts {
 	}
 
 	private void show(String[] args) {
-		// TODO Auto-generated method stub
+		DatabaseManager dm = new DatabaseManager();
+		dm.run(() ->{
+			dm.getSession().createQuery("from PCPart", PCPart.class)
+		      .getResultList().forEach((e)->System.out.println(e.toString()));;
+		});
 		
 	}
 
