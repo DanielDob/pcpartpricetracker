@@ -9,7 +9,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.objects.Shop;
+import com.daniel.pcpartpricetracker.objects.Type;
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
+
+import antlr.StringUtils;
 
 public class Parts {
 
@@ -30,10 +34,29 @@ public class Parts {
 		}
 		
 	}
-
+	Shop shopClass;
 	private void add(String[] args) {
+		
+		int part=-1,type=-1,shop=-1;
+		try {  
+		   part = Integer.parseInt(args[2]);  
+		 } catch(NumberFormatException e){  
+		   System.out.println("[ERROR] Wrong part id.\n"+e.getMessage()); 
+		 }  
+		try {  
+		   type = Integer.parseInt(args[3]);  
+		 } catch(NumberFormatException e){  
+			 new Type();
+			 type=Type.stringToId.get(args[3]);
+		 }  
+		try {  
+		   shop = Integer.parseInt(args[4]);  
+		 } catch(NumberFormatException e){  
+			shop = new Shop(args[4]).getId();
+		 }  
 		DatabaseManager dm = new DatabaseManager();
-		dm.run(() -> dm.getSession().save(new PCPart(Integer.valueOf(args[2]),Integer.valueOf(args[3]),Integer.valueOf(args[4]))));
+		int partFinal=part, typeFinal=type,shopFinal=shop;
+		dm.run(() -> dm.getSession().save(new PCPart(partFinal,typeFinal,shopFinal)));
  	}
 
 	private void open(String[] args) {
@@ -44,6 +67,7 @@ public class Parts {
 	private void show(String[] args) {
 		DatabaseManager dm = new DatabaseManager();
 		dm.run(() ->{
+			
 			dm.getSession().createQuery("from PCPart", PCPart.class)
 		      .getResultList().forEach((e)->System.out.println(e.toString()));;
 		});

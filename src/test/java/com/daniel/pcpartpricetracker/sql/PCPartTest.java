@@ -44,8 +44,8 @@ public class PCPartTest {
 	@Test
 	public void insert() {
 		Parts p = new Parts();
-		p.executePart("add", "part add 12345 1 1".split(" "));
-		p.executePart("add", "part add 54321 5 1".split(" "));
+		p.executePart("add", "part add 12345 CPU XKOM".split(" "));
+		p.executePart("add", "part add 54321 HDD_2 MORELE".split(" "));
 
 		p.executePart("show", "part show".split(" "));
 	}

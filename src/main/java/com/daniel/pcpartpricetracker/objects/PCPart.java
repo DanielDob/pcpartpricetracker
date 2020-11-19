@@ -5,11 +5,18 @@ import java.util.List;
 
 import javax.annotation.Generated;
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import lombok.NoArgsConstructor;
@@ -38,19 +45,26 @@ public class PCPart {
 	 *  name on site
 	 */
 	String name;
-	@OneToMany(mappedBy = "price", cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.ALL)
 	List<Price> price;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	@JoinColumn(name="shop")
+	Shop shop;
+	
 	public PCPart(int code, int type, int shop ) {
 		this.code=code;
 		this.type=type;
-		//this.shop=shop;
+		new Shop(shop);
 	}
-	public PCPart(int id,int type, String name, List<Price> price) {
+	public PCPart(int id,int type, String name, List<Price> price,Shop shop) {
 		super();
 		this.id = id;
 		this.type=type;
 		this.name = name;
 		this.price = price;
+		this.shop=shop;
 	}
 
 	public int getId() {
@@ -87,6 +101,6 @@ public class PCPart {
 	
 	@Override
 	public String toString() {
-		return "ID: "+id+" code: "+code+"name: "+ name ;
+		return "ID: "+id+" code: "+code+" name: "+ name+" type: "+Type.idToString.get(type)+"("+type+") shop: "+(shop.name==(null) ? "" : shop.name)+"("+shop.id+")" ;
 	}
 }
