@@ -1,7 +1,11 @@
 package com.daniel.pcpartpricetracker;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +20,7 @@ import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
 import antlr.StringUtils;
 
 public class Parts {
-
+	
 	public void executePart(String name, String[] args) {
 		switch(name) {
 			case "add":
@@ -30,6 +34,9 @@ public class Parts {
 				break;
 			case "xlsx":
 				xlsx(args);
+				break;
+			case "help":
+				Help.printPartFullHelp(false);;
 				break;
 		}
 		
@@ -60,17 +67,27 @@ public class Parts {
  	}
 
 	private void open(String[] args) {
-		// TODO Auto-generated method stub
+		Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+	        try {
+	            desktop.browse(new URI("https://www.x-kom.pl/p/"+args[2]));
+	        }catch(Exception e) {
+	        	e.printStackTrace();
+	        }
+	    }
 		
 	}
 
 	private void show(String[] args) {
 		DatabaseManager dm = new DatabaseManager();
-		dm.run(() ->{
-			
-			dm.getSession().createQuery("from PCPart", PCPart.class)
-		      .getResultList().forEach((e)->System.out.println(e.toString()));;
-		});
+		ArrayList<PCPart> partsList=new ArrayList<PCPart>() {};
+		partsList=dm.collector(() ->(ArrayList<PCPart>)dm.getSession().createQuery("from PCPart", PCPart.class)
+												.getResultList()
+		);
+		if(args[2].equals("-all")) {
+			partsList.forEach(e->System.out.println(e));
+		}
+		
 		
 	}
 

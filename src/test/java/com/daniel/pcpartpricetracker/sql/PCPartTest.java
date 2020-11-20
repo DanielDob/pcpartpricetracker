@@ -1,22 +1,11 @@
 package com.daniel.pcpartpricetracker.sql;
 
-import static org.junit.Assert.assertSame;
-
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.metamodel.internal.MetamodelImpl;
-import org.hibernate.query.Query;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.daniel.pcpartpricetracker.Parts;
-import com.daniel.pcpartpricetracker.objects.PCPart;
-import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
 
 public class PCPartTest {
 	List<String> list = null;
@@ -44,9 +33,18 @@ public class PCPartTest {
 	@Test
 	public void insert() {
 		Parts p = new Parts();
-		p.executePart("add", "part add 12345 CPU XKOM".split(" "));
-		p.executePart("add", "part add 54321 HDD_2 MORELE".split(" "));
-
-		p.executePart("show", "part show".split(" "));
+		//p.executePart("add", "part add 12345 CPU XKOM".split(" "));
+		//.executePart("add", "part add 54321 HDD_2 MORELE".split(" "));
+		
+		p.executePart("show", "part show -all".split(" "));
+	}
+	
+	@Test
+	public void open() {
+	    Parts p = new Parts();
+	    p.executePart("open", "part open 606125".split(" "));
+	}
+	public void shopPart() {
+		
 	}
 }

@@ -1,5 +1,7 @@
 package com.daniel.pcpartpricetracker.sql.logic;
 
+import java.util.ArrayList;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.daniel.pcpartpricetracker.interfaces.Collector;
 import com.daniel.pcpartpricetracker.interfaces.Submitter;
 import com.sun.media.sound.SF2GlobalRegion;
 
@@ -14,6 +17,7 @@ public class DatabaseManager {
 	//private Connection conn = null;
 	private Session session=null;
 	private Transaction transaction = null;
+	public Object run;
 	public DatabaseManager() {
 		//connect();
 	}
@@ -29,6 +33,18 @@ public class DatabaseManager {
 		}finally {
 			close();	
 		}
+	}
+	public <E> ArrayList<E> collector(Collector<E> s) {
+		
+		connect();
+		try{
+			return collect(s);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close();	
+		}
+		return null;
 	}
 	private void connect() {
 		try {
@@ -101,8 +117,13 @@ public class DatabaseManager {
 	public void setSession(Session session) {
 		this.session = session;
 	}
-	public void  submit(Submitter s){
+	private void  submit(Submitter s){
 		s.submit();
 		transaction.commit();
+	}
+	private <E> ArrayList<E>  collect(Collector<E> s){
+		transaction.commit();
+		return s.collect();
+		
 	}
 }

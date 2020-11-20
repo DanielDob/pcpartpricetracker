@@ -11,13 +11,13 @@ public class Help {
 		
 			
 	}
-	private static void printTerminologyUsedInFullHelp() {
+	public static void printTerminologyUsedInFullHelp() {
 		System.out.println(	"date - dd.MM.yyyy\n"
 				+ "number - number in link in ceneo"
 				+ "type - cpu|gpu|ps|mobo|hdd|sdd|cooler|case|fan|ram|m2|psu");
 		
 	}
-	private static void printScrapFullHelp(boolean b) {
+	public static void printScrapFullHelp(boolean b) {
 		System.out.println( "scrap"
 				+ "\n\tGo scrap");
 		/*
@@ -26,15 +26,15 @@ public class Help {
 		 */
 		
 	}
-	private static void printPartFullHelp(boolean b) {
+	public static void printPartFullHelp(boolean b) {
 		System.out.println(
 				 "part"
 					+ "\n\tadd [code] [type] [shop]"
 					+ "\n\t\tAdding new part to tracking price. Shop can be a number id."
 					+ "\n\topen [number]|"
 					+ "\n\t\tOpens in broser part"
-					+ "\n\tshow [[number] | [-all]] [-d] [-h|-h [date][date]] [-sn]"
-					+ "\n\t\tDispalying part information by default shows only full name and code. -d details. -h history. -sn short name."
+					+ "\n\tshow [-all] | [ [number] [-h|-h=[[startDate],[endDate]]  [part=[partID | partName] ] ] [-p | -d]"
+					+ "\n\t\tDispalying part information by default shows only full name and code. -p,-d shows also prices of part/parts -h history. startDate i endDate shows prices within range od dates."
 					+ "\n\txlsx ['name'] [-a] [-d [date]]"
 					+ "\n\t\tSave history to xlsx file. -a all. -d date."
 					);
