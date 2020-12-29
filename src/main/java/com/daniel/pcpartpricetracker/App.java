@@ -1,9 +1,13 @@
 package com.daniel.pcpartpricetracker;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.prefs.Preferences;
 
+import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.objects.Shop;
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
+import com.daniel.pcpartpricetracker.sql.logic.ScrapManager;
 
 /**
  * Hello world!
@@ -11,6 +15,7 @@ import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
  */
 public class App 
 {
+	
     public static void main( String[] args )
     {
     	Preferences prefs = Preferences.userNodeForPackage(App.class);

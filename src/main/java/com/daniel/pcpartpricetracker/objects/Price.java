@@ -18,4 +18,11 @@ public class Price {
 	int partId;
 	int shopId;
 	double price;
+	long time;
+	public Price(int partID, int shopID, double price,long time) {
+		this.partId=partID;
+		this.shopId=shopID;
+		this.price=price;
+		this.time=time;
+	}
 }

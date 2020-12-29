@@ -5,17 +5,21 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Transaction;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.objects.Price;
 import com.daniel.pcpartpricetracker.objects.Shop;
 import com.daniel.pcpartpricetracker.objects.Type;
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
+import com.daniel.pcpartpricetracker.sql.logic.ScrapManager;
 
 import antlr.StringUtils;
 
@@ -43,7 +47,7 @@ public class Parts {
 	}
 	Shop shopClass;
 	private void add(String[] args) {
-		
+		//TODO name scratch
 		int part=-1,type=-1,shop=-1;
 		try {  
 		   part = Integer.parseInt(args[2]);  
@@ -63,7 +67,15 @@ public class Parts {
 		 }  
 		DatabaseManager dm = new DatabaseManager();
 		int partFinal=part, typeFinal=type,shopFinal=shop;
-		dm.run(() -> dm.getSession().save(new PCPart(partFinal,typeFinal,shopFinal)));
+		ScrapManager sm = new ScrapManager();
+		sm.getItem(partFinal);
+		double price = sm.getPrice();
+		String name = sm.getName();
+		System.out.println(name);
+		dm.run(() -> {
+			dm.getSession().save(new Price(partFinal,shopFinal,price, new Date().getTime())); //TODO one time for all parts at one measure
+			dm.getSession().save(new PCPart(partFinal,typeFinal,shopFinal,name));
+		});
  	}
 
 	private void open(String[] args) {

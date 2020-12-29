@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
+
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -48,17 +50,15 @@ public class PCPart {
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Price> price;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	@JoinColumn(name="shop")
-	Shop shop;
+	int shop;
 	
-	public PCPart(int code, int type, int shop ) {
+	public PCPart(int code, int type, int shop,String name ) {
 		this.code=code;
 		this.type=type;
-		new Shop(shop);
+		this.shop=shop;
+		this.name=name;
 	}
-	public PCPart(int id,int type, String name, List<Price> price,Shop shop) {
+	public PCPart(int id,int type, String name, List<Price> price,int shop) {
 		super();
 		this.id = id;
 		this.type=type;
@@ -101,6 +101,8 @@ public class PCPart {
 	
 	@Override
 	public String toString() {
-		return "ID: "+id+" code: "+code+" name: "+ name+" type: "+Type.idToString.get(type)+"("+type+") shop: "+(shop.name==(null) ? "" : shop.name)+"("+shop.id+")" ;
+		Shop s = new Shop(shop);
+		new Type();
+		return "ID: "+id+" code: "+code+" name: "+ (name==null ? "" : name)+" type: "+Type.idToString.get(type)+"("+type+") shop: "+(s==null||s.name==(null) ? "none" : s.name+" ("+s.id+")") ;
 	}
 }

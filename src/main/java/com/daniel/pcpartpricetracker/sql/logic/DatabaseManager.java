@@ -31,6 +31,7 @@ public class DatabaseManager {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
+			transaction.commit();
 			close();	
 		}
 	}
@@ -119,11 +120,9 @@ public class DatabaseManager {
 	}
 	private void  submit(Submitter s){
 		s.submit();
-		transaction.commit();
 	}
 	private <E> ArrayList<E>  collect(Collector<E> s){
 		transaction.commit();
 		return s.collect();
-		
 	}
 }
