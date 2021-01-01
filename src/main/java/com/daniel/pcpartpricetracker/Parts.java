@@ -67,7 +67,7 @@ public class Parts {
 		 }  
 		DatabaseManager dm = new DatabaseManager();
 		int partFinal=part, typeFinal=type,shopFinal=shop;
-		ScrapManager sm = new ScrapManager();
+		ScrapManager sm = new ScrapManager(shopFinal);
 		sm.getItem(partFinal);
 		double price = sm.getPrice();
 		String name = sm.getName();

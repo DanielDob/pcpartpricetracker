@@ -11,8 +11,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
+import com.daniel.pcpartpricetracker.sql.logic.ScrapManager;
+
 public class Scraper {
-	@Test
+	//@Test
 	public void scrap() {
 		Document doc =null;
 		try {
@@ -32,5 +34,17 @@ public class Scraper {
 			System.out.println(headline.ownText());
 		}
 		assertTrue(true);
+	}
+	@Test
+	public void scrapXKom() {
+		ScrapManager cm = new ScrapManager(1);
+		cm.getItem(597348);
+		System.out.println(cm.getName()+"  "+cm.getPrice());
+	}
+	@Test
+	public void scrapMorele() {
+		ScrapManager cm = new ScrapManager(2);
+		cm.getItem(6409532);
+		System.out.println(cm.getName()+"  "+cm.getPrice());
 	}
 }
