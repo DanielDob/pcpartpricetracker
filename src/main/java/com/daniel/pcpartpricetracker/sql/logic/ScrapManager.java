@@ -50,7 +50,6 @@ public class ScrapManager {
 			case 1:
 				try {
 					doc = Jsoup.connect(path)
-								  .timeout(3000)
 								  .followRedirects(true)
 								  .post();
 				} catch (IOException e) {
@@ -92,7 +91,7 @@ public class ScrapManager {
 	private String[] getSitesPaths() {
 		switch(shopID) {
 			case 1:
-				return new String[] {"div.u7xnnm-4","h1.sc-1x6crnh-5"}; 
+				return new String[] {"div.u7xnnm-4","h1.sc-1bker4h-4"}; 
 			case 2:
 				return new String[] {"div#product_price_brutto","h1.prod-name"};
 			default:

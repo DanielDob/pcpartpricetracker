@@ -71,9 +71,8 @@ public class Parts {
 		sm.getItem(partFinal);
 		double price = sm.getPrice();
 		String name = sm.getName();
-		System.out.println(name);
 		dm.run(() -> {
-			dm.getSession().save(new Price(partFinal,shopFinal,price, new Date().getTime())); //TODO one time for all parts at one measure
+			//dm.getSession().save(new Price(partFinal,shopFinal,price, new Date().getTime())); //TODO one time for all parts at one measure
 			dm.getSession().save(new PCPart(partFinal,typeFinal,shopFinal,name));
 		});
  	}

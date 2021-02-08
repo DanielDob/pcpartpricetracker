@@ -39,12 +39,12 @@ public class Scraper {
 	public void scrapXKom() {
 		ScrapManager cm = new ScrapManager(1);
 		cm.getItem(597348);
-		System.out.println(cm.getName()+"  "+cm.getPrice());
+		System.out.println("Xkom"+cm.getName()+"  "+cm.getPrice());
 	}
 	@Test
 	public void scrapMorele() {
 		ScrapManager cm = new ScrapManager(2);
 		cm.getItem(6409532);
-		System.out.println(cm.getName()+"  "+cm.getPrice());
+		System.out.println("morele"+cm.getName()+"  "+cm.getPrice());
 	}
 }
