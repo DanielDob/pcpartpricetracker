@@ -1,5 +1,7 @@
 package com.daniel.pcpartpricetracker;
 
+import java.util.Date;
+
 public class ExecuteInput {
 
 	Build build = new Build();
@@ -16,7 +18,7 @@ public class ExecuteInput {
 		case "build":
 			build.executeBuild(next.split(" ")[1],next.split(" "));
 		case "scrap":
-			Scrap.executeCrap();
+			Scrap.executeCrap(new Date().getTime());
 			break;
 		case "part":
 			parts.executePart(next.split(" ")[1],next.split(" "));
