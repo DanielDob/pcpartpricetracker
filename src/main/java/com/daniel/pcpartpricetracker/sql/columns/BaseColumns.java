@@ -8,7 +8,7 @@ import com.daniel.pcpartpricetracker.objects.PCPart;
 public interface BaseColumns <P> {
 	public static final String _ID ="id";
 
-	public Connection connect();
+	public void connect();
 	
 	public void insert(P b);
 	public void insert(ArrayList<P> listB);

@@ -9,15 +9,13 @@ import com.daniel.pcpartpricetracker.sql.columns.PCBuildColumns;
 
 public class PCBuildManager implements BuildColumns,PCBuildColumns{
 
-	Connection conn;
+	//Connection conn;
 	public PCBuildManager() {
-		conn=connect();
+		connect();
 	}
 	@Override
-	public Connection connect() {
+	public void connect() {
 		DatabaseManager dbm = new DatabaseManager();
-		return dbm.isConnected();
-		
 	}
 
 	@Override
