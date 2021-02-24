@@ -35,16 +35,23 @@ public class Scraper {
 		}
 		assertTrue(true);
 	}
-	@Test
+	//@Test
 	public void scrapXKom() {
 		ScrapManager cm = new ScrapManager(1);
 		cm.getItem(597348);
 		System.out.println("Xkom"+cm.getName()+"  "+cm.getPrice());
 	}
-	@Test
+	//@Test
 	public void scrapMorele() {
 		ScrapManager cm = new ScrapManager(2);
 		cm.getItem(6409532);
 		System.out.println("morele"+cm.getName()+"  "+cm.getPrice());
+	}
+	@Test
+	public void scrapCeneo() {
+		ScrapManager cm = new ScrapManager(3);
+		cm.getItems(63960907);
+		for(int i=0;i<cm.getPrices().length;i++) 
+			System.out.println("ceneo  ->  "+cm.getShops()[i]+"  "+cm.getName()+"   "+cm.getPrices()[i]);
 	}
 }

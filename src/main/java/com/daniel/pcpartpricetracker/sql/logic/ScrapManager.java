@@ -24,7 +24,9 @@ public class ScrapManager {
 	private int shopID;
 	private Document doc =null;
 	String name;
+	String[] shops;
 	double price;
+	double[] prices;
 	
 	/*private Session session=null;
 	public void run(Submitter s) {
@@ -45,9 +47,13 @@ public class ScrapManager {
 			case 2:
 				path="https://morele.net/";
 				break;
+			case 3:
+				path="https://www.ceneo.pl/"+id;
+				break;
 		}
 		switch(shopID) {
 			case 1:
+			case 3:
 				try {
 					doc = Jsoup.connect(path)
 								  .followRedirects(true)
@@ -65,7 +71,8 @@ public class ScrapManager {
 					page = client.getPage(path);
 					((HtmlInput ) page.getFirstByXPath("//input[@class='form-control quick-search-autocomplete']")).setValueAttribute(id+"");
 				// create a submit button - it doesn't work with 'input'
-				HtmlElement button = (HtmlElement) page.getFirstByXPath("//button[@class='btn btn-blue h-quick-search-submit']");
+					HtmlElement button = (HtmlElement) page.getFirstByXPath("//button[@class='btn btn-primary h-quick-search-submit']");
+					//HtmlElement button = (HtmlElement) page.getFirstByXPath("//button[@class='btn btn-blue h-quick-search-submit']");
 
 				page = button.click();
 				path = page.getBaseURI();
@@ -94,6 +101,9 @@ public class ScrapManager {
 				return new String[] {"div.u7xnnm-4","h1.sc-1bker4h-4"}; 
 			case 2:
 				return new String[] {"div#product_price_brutto","h1.prod-name"};
+			case 3: 
+				//"span.value","span.penny","div.product-top-2020__product-info__tags", "div.product-offer-2020__container.clickable-offer.js_offer-container-click.js_product-offer"
+				return new String[] {"li.product-offers-2020__list__item.js_productOfferGroupItem","span.value","span.penny","div.product-offer-2020__container","h1.product-top-2020__product-info__name" }; 
 			default:
 				return null;
 		}
@@ -124,7 +134,41 @@ public class ScrapManager {
 			name=(headline.ownText());
 		}
 	}
+	public void getItems(int id) {
+		doc  = open(id);
+		String priceString="";
+		String[] xpaths = getSitesPaths();
+		Elements newsHeadlines = doc.select(xpaths[0]);
+		prices = new double[newsHeadlines.size()];
+		shops = new String[newsHeadlines.size()];
+		 for (int i=0;i <newsHeadlines.size();i++) {
+			 switch(shopID) {
+				 case 3:
+					 prices[i]=Double.parseDouble((newsHeadlines.get(i).select(xpaths[1]).first().ownText()+newsHeadlines.get(i).select(xpaths[2]).first().ownText()).replace(',','.'));
+					 shops[i]=newsHeadlines.get(i).select(xpaths[3]).first().attr("data-ShopUrl");
+					 //shops[i].replace("ceneo", "");
+					 break;
+			 }
+		 }
+			
+			newsHeadlines = doc.select(xpaths[4]);
+			for (Element headline : newsHeadlines) {
+				name=headline.ownText().toString();
+			}
+	}
 
+	public String[] getShops() {
+		return shops;
+	}
+	public void setShops(String[] shops) {
+		this.shops = shops;
+	}
+	public double[] getPrices() {
+		return prices;
+	}
+	public void setPrices(double[] prices) {
+		this.prices = prices;
+	}
 	public String getName() {
 		return name;
 	}
