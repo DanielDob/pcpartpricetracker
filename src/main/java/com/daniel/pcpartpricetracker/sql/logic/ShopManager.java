@@ -3,7 +3,6 @@ package com.daniel.pcpartpricetracker.sql.logic;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.daniel.pcpartpricetracker.objects.PCPart.Shop;
 import com.daniel.pcpartpricetracker.sql.columns.ShopColumns;
 
 public class ShopManager implements ShopColumns{

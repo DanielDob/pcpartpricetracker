@@ -1,7 +1,5 @@
 package com.daniel.pcpartpricetracker.sql.columns;
 
-import java.util.ArrayList;
-
 import com.daniel.pcpartpricetracker.objects.PCPart;
 
 public interface PCPartColumns extends BaseColumns<PCPart>{

@@ -1,9 +1,6 @@
 package com.daniel.pcpartpricetracker.sql.columns;
 
-import java.sql.Connection;
 import java.util.ArrayList;
-
-import com.daniel.pcpartpricetracker.objects.PCPart;
 
 public interface BaseColumns <P> {
 	public static final String _ID ="id";

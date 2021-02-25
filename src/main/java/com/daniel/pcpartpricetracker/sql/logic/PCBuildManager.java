@@ -1,6 +1,5 @@
 package com.daniel.pcpartpricetracker.sql.logic;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.daniel.pcpartpricetracker.objects.PCBuild;

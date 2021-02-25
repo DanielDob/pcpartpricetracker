@@ -1,23 +1,16 @@
 package com.daniel.pcpartpricetracker.sql.logic;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.daniel.pcpartpricetracker.interfaces.Submitter;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
-import antlr.StringUtils;
 
 public class ScrapManager {
 

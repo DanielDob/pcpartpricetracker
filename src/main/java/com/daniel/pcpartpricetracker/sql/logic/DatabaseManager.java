@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
 import com.daniel.pcpartpricetracker.interfaces.Collector;
 import com.daniel.pcpartpricetracker.interfaces.Submitter;
-import com.sun.media.sound.SF2GlobalRegion;
 
 public class DatabaseManager {
 	//private Connection conn = null;

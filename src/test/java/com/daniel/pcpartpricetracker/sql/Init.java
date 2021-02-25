@@ -1,8 +1,6 @@
 package com.daniel.pcpartpricetracker.sql;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
 import org.junit.Test;
 
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;

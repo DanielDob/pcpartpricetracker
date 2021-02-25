@@ -35,13 +35,13 @@ public class Scraper {
 		}
 		assertTrue(true);
 	}
-	//@Test
+	@Test
 	public void scrapXKom() {
 		ScrapManager cm = new ScrapManager(1);
 		cm.getItem(597348);
 		System.out.println("Xkom"+cm.getName()+"  "+cm.getPrice());
 	}
-	//@Test
+	@Test
 	public void scrapMorele() {
 		ScrapManager cm = new ScrapManager(2);
 		cm.getItem(6409532);

@@ -10,7 +10,6 @@ import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity

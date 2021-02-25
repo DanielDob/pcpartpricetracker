@@ -1,27 +1,13 @@
 package com.daniel.pcpartpricetracker;
 
 import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.hibernate.Transaction;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import com.daniel.pcpartpricetracker.objects.PCPart;
-import com.daniel.pcpartpricetracker.objects.Price;
 import com.daniel.pcpartpricetracker.objects.Shop;
 import com.daniel.pcpartpricetracker.objects.Type;
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
 import com.daniel.pcpartpricetracker.sql.logic.ScrapManager;
-
-import antlr.StringUtils;
 
 public class Parts {
 	
