@@ -3,8 +3,9 @@ package com.daniel.pcpartpricetracker.sql.columns;
 import java.util.ArrayList;
 
 import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.objects.Shop;
 
-public interface ShopColumns extends BaseColumns<PCPart.Shop>{
+public interface ShopColumns extends BaseColumns<Shop>{
 	
 	public static final String PRICE_TABLE="price";
 	

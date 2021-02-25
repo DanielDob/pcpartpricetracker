@@ -13,8 +13,9 @@ public class PCBuildManager implements BuildColumns,PCBuildColumns{
 		connect();
 	}
 	@Override
-	public void connect() {
+	public boolean connect() {
 		DatabaseManager dbm = new DatabaseManager();
+		return dbm.isConnected();
 	}
 
 	@Override

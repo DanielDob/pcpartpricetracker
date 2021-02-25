@@ -2,10 +2,12 @@ package com.daniel.pcpartpricetracker.sql.columns;
 
 import java.util.ArrayList;
 
+import java.sql.Connection;
+
 public interface BaseColumns <P> {
 	public static final String _ID ="id";
 
-	public void connect();
+	public boolean connect();
 	
 	public void insert(P b);
 	public void insert(ArrayList<P> listB);

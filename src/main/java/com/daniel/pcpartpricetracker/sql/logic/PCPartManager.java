@@ -10,10 +10,10 @@ public class PCPartManager implements PCPartColumns{
 
 	Connection conn;
 	public PCPartManager() {
-		conn=connect();
+		connect();
 	}
 	@Override
-	public Connection connect() {
+	public boolean connect() {
 		DatabaseManager dbm = new DatabaseManager();
 		return dbm.isConnected();
 		
