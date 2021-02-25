@@ -23,7 +23,6 @@ public class Scrap {
 			for(PCPart p : parts) {
 				dm.run(() -> {
 					double price = sm.getPrice();
-					String name = sm.getName();
 					dm.getSession().save(new Price(p.getCode(),shopID,price, time)); //TODO one time for all parts at one measure
 				});
 			}
