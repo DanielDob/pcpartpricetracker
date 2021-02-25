@@ -23,6 +23,9 @@ public class ExecuteInput {
 		case "part":
 			parts.executePart(next.split(" ")[1],next.split(" "));
 			break;
+		case "version":
+		case "v":
+			System.out.println("0.1");
 		case "q":
 		case "quit":
 			System.exit(0);
