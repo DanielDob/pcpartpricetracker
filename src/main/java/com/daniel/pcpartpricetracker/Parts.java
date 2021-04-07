@@ -76,6 +76,10 @@ public class Parts {
 	}
 
 	private void show(String[] args) {
+		if(args.length<3) {
+			System.out.println("Missing third word");
+			return;
+		}
 		DatabaseManager dm = new DatabaseManager();
 		ArrayList<PCPart> partsList=new ArrayList<PCPart>() {};
 		partsList=dm.collector(() ->(ArrayList<PCPart>)dm.getSession().createQuery("from PCPart", PCPart.class)

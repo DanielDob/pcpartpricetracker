@@ -1,5 +1,7 @@
 package com.daniel.pcpartpricetracker;
 
+import com.daniel.pcpartpricetracker.objects.Type;
+
 public class Help {
 	
 	public static void printFullHelp(){
@@ -13,8 +15,8 @@ public class Help {
 	}
 	public static void printTerminologyUsedInFullHelp() {
 		System.out.println(	"date - dd.MM.yyyy\n"
-				+ "number - number in link in ceneo"
-				+ "type - cpu|gpu|ps|mobo|hdd|sdd|cooler|case|fan|ram|m2|psu");
+				+ "number - number in link in ceneo\n"
+				+ "type - "+(new Type().toString()));
 		
 	}
 	public static void printScrapFullHelp(boolean b) {

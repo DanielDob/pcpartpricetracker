@@ -1,6 +1,8 @@
 package com.daniel.pcpartpricetracker.objects;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Type {
 	
@@ -50,7 +52,7 @@ public class Type {
 	public final static String M2_3_STRING="M2_3";
 	public final static String CASE_STRING="Case";
 	
-	public static HashMap<Integer, String> idToString = new HashMap<Integer, String>();
+	public static HashMap<Integer, String> idToString = new LinkedHashMap<Integer, String>();
 	{
 		idToString.put(CPU,CPU_STRING);
 		idToString.put(GPU,GPU_STRING);
@@ -76,7 +78,7 @@ public class Type {
 		idToString.put(CASE,CASE_STRING);
 	}
 	
-	public static HashMap<String,Integer> stringToId = new HashMap<String,Integer>();
+	public static HashMap<String,Integer> stringToId = new LinkedHashMap<String,Integer>();
 	{
 		stringToId.put(CPU_STRING,CPU);
 		stringToId.put(GPU_STRING,GPU);
@@ -102,4 +104,12 @@ public class Type {
 		stringToId.put(CASE_STRING,CASE);
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(@SuppressWarnings("rawtypes") Map.Entry i :  stringToId.entrySet()) {
+			sb.append(i+" ");
+		}
+		return sb.toString();
+	}
 }
