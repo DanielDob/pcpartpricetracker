@@ -19,6 +19,9 @@ public class Price {
 	int shopId;
 	double price;
 	long time;
+	public Price() {
+		
+	}
 	public Price(int partID, int shopID, double price,long time) {
 		this.partId=partID;
 		this.shopId=shopID;

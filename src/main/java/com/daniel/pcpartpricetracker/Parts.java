@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.net.URI;
 import java.util.ArrayList;
 import com.daniel.pcpartpricetracker.objects.PCPart;
+import com.daniel.pcpartpricetracker.objects.Price;
 import com.daniel.pcpartpricetracker.objects.Shop;
 import com.daniel.pcpartpricetracker.objects.Type;
 import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
@@ -87,6 +88,25 @@ public class Parts {
 		);
 		if(args[2].equals("-all")) {
 			partsList.forEach(e->System.out.println(e));
+		}else {
+			int a =Integer.valueOf(args[2]);
+
+			PCPart pcpart = null  ;
+			for(PCPart p : partsList)
+				if(p.getCode()==a)
+					pcpart=p;
+			partsList=dm.collector(() ->(ArrayList<PCPart>)dm.getSession().createQuery("from PCPart", PCPart.class)
+					.getResultList()
+					);
+			int b = pcpart.getCode();
+			ArrayList<Price> priceList=new ArrayList<Price>() {};
+			
+			priceList=dm.collector(() ->(ArrayList<Price>)dm.getSession().createQuery("from Price where partID = "+b, Price.class)
+					.getResultList()
+					);
+			for(Price p  : priceList) {
+				System.out.println(p.getId()+"\t"+p.getPrice()+"\t"+p.getTime()+"\t"+p.getShopId());
+			}
 		}
 		
 		
