@@ -2,12 +2,14 @@ package com.daniel.pcpartpricetracker.sql.logic;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import com.daniel.pcpartpricetracker.interfaces.Collector;
 import com.daniel.pcpartpricetracker.interfaces.Submitter;
+import com.daniel.pcpartpricetracker.objects.PCPart;
 
 public class DatabaseManager {
 	//private Connection conn = null;
@@ -42,6 +44,15 @@ public class DatabaseManager {
 			close();	
 		}
 		return null;
+	}
+	
+	public int size() {
+		SessionFactory sf = new Configuration()
+				  .configure().buildSessionFactory();
+	    session= sf.openSession();
+	    int a = Integer.valueOf(session.createNativeQuery("SELECT COUNT(*) from pc_part").getSingleResult()+"");
+	    close();
+		return a;
 	}
 	private void connect() {
 		try {
