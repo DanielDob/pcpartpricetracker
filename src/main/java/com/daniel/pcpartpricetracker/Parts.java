@@ -11,7 +11,7 @@ import com.daniel.pcpartpricetracker.sql.logic.DatabaseManager;
 import com.daniel.pcpartpricetracker.sql.logic.ScrapManager;
 
 public class Parts {
-	
+	public static int TEST_ID=123;
 	public void executePart(String name, String[] args) {
 		switch(name) {
 			case "add":
@@ -53,6 +53,9 @@ public class Parts {
 			shop = new Shop(args[4]).getId();
 		 }  
 		DatabaseManager dm = new DatabaseManager();
+		if(Integer.valueOf(args[2])==TEST_ID) {
+			
+		}
 		int partFinal=part, typeFinal=type,shopFinal=shop;
 		ScrapManager sm = new ScrapManager(shopFinal);
 		sm.getItem(partFinal);
@@ -116,5 +119,9 @@ public class Parts {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//======================================================================
+	// for testing
+	//======================================================================
 
 }

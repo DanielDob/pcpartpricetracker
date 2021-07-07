@@ -96,7 +96,8 @@ public class ScrapManager {
 				return new String[] {"div#product_price_brutto","h1.prod-name"};
 			case 3: 
 				//"span.value","span.penny","div.product-top-2020__product-info__tags", "div.product-offer-2020__container.clickable-offer.js_offer-container-click.js_product-offer"
-				return new String[] {"li.product-offers-2020__list__item.js_productOfferGroupItem","span.value","span.penny","div.product-offer-2020__container","h1.product-top-2020__product-info__name" }; 
+				//"li.product-offers-2020__list__item.js_productOfferGroupItem",
+				return new String[] {"span.price","span.value","span.penny","div.product-offer-2020__container","h1.product-top-2020__product-info__name" }; 
 			default:
 				return null;
 		}
@@ -118,11 +119,14 @@ public class ScrapManager {
 				 case 2 :
 					 priceString = headline.attr("data-default");
 					 break;
+				 case 3 : 
+					 priceString = headline.select(xpaths[1]).get(0).ownText()+""+headline.select(xpaths[2]).get(0).ownText();
+					 break;
 			 }
 			price=Double.valueOf(priceString.replace(',','.').replaceAll(" ","").substring(0,priceString.replaceAll(" ","").length()-2));
 		}
 
-		newsHeadlines = doc.select(xpaths[1]);
+		newsHeadlines = doc.select(xpaths[shopID!=3 ? 1 :  4]);
 		for (Element headline : newsHeadlines) {
 			name=(headline.ownText());
 		}
@@ -146,7 +150,10 @@ public class ScrapManager {
 			
 			newsHeadlines = doc.select(xpaths[4]);
 			for (Element headline : newsHeadlines) {
-				name=headline.ownText().toString();
+				if(shopID!=2)
+					name=headline.ownText().toString();
+				else
+					headline.attr("data-default");
 			}
 	}
 
