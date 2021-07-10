@@ -97,7 +97,7 @@ public class ScrapManager {
 			case 3: 
 				//"span.value","span.penny","div.product-top-2020__product-info__tags", "div.product-offer-2020__container.clickable-offer.js_offer-container-click.js_product-offer"
 				//"li.product-offers-2020__list__item.js_productOfferGroupItem",
-				return new String[] {"span.price","span.value","span.penny","div.product-offer-2020__container","h1.product-top-2020__product-info__name" }; 
+				return new String[] {"span.price","span.value","span.penny","div.product-offer__container","h1.product-top__product-info__name" }; 
 			default:
 				return null;
 		}
@@ -135,14 +135,14 @@ public class ScrapManager {
 		doc  = open(id);
 		String priceString="";
 		String[] xpaths = getSitesPaths();
-		Elements newsHeadlines = doc.select(xpaths[0]);
+		Elements newsHeadlines = doc.select(xpaths[3]);
 		prices = new double[newsHeadlines.size()];
 		shops = new String[newsHeadlines.size()];
 		 for (int i=0;i <newsHeadlines.size();i++) {
 			 switch(shopID) {
 				 case 3:
 					 prices[i]=Double.parseDouble((newsHeadlines.get(i).select(xpaths[1]).first().ownText()+newsHeadlines.get(i).select(xpaths[2]).first().ownText()).replace(',','.'));
-					 shops[i]=newsHeadlines.get(i).select(xpaths[3]).first().attr("data-ShopUrl");
+					 shops[i]=newsHeadlines.get(i).attr("data-shopurl");
 					 //shops[i].replace("ceneo", "");
 					 break;
 			 }
